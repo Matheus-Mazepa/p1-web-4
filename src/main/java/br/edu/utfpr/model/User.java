@@ -1,5 +1,7 @@
 package br.edu.utfpr.model;
 
+import br.edu.utfpr.util.BCrypt;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,16 +26,21 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
-	public User() {
-		
-	}
+	public User() {}
 	
 	public User(int id, String name, String userName, String password) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.userName = userName;
-		this.password = password;
+		this.setPassword(password);
+	}
+
+	public User(String name, String userName, String password) {
+		super();
+		this.name = name;
+		this.userName = userName;
+		this.setPassword(password);
 	}
 
 	public int getId() {
@@ -65,7 +72,8 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt(12));
+		this.password = passwordHash;
 	}
 	
 	
