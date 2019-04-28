@@ -39,20 +39,15 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("agenda");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
+		
 		
 		String userName = request.getParameter("user_name");
 		String name = request.getParameter("name");
+		//TODO validar confirmacao de senha. Talvez com JS
 		String pwd = request.getParameter("password");
-
-		em.getTransaction().commit();
 		User user = new User(name, userName, pwd);
-		//user.save();
-		em.close();
-		emf.close();
+		user.save();
+	
 		response.sendRedirect("registre-se");
 	}
 

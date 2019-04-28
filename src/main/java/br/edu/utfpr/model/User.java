@@ -2,6 +2,8 @@ package br.edu.utfpr.model;
 
 import br.edu.utfpr.util.BCrypt;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -10,12 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.Table;
-
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 
 @Entity
 @Table(name = "users")
@@ -33,23 +31,11 @@ public class User {
 	
 	@Column(name = "password")
 	private String password;
-	
-<<<<<<< HEAD
-	
+		
 	public User() {
 		
 	}
-=======
-	public User() {}
->>>>>>> 41c732c5b5592797912c912dbdaa6344647dbd0a
 	
-	public User(String name, String userName, String password) {
-		super();
-		this.name = name;
-		this.userName = userName;
-		this.setPassword(password);
-	}
-
 	public User(String name, String userName, String password) {
 		super();
 		this.name = name;
@@ -91,7 +77,7 @@ public class User {
 	}
 	
 	
-	public  void salvar() {		
+	public  void save() {		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
@@ -100,6 +86,38 @@ public class User {
 		em.close();
 		emf.close();
 	}
+	
+	
+	public void update(int id, User newData) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+		EntityManager em = emf.createEntityManager();
+		
+		User user = em.find(User.class, id);
+		if(user != null) {
+			em.getTransaction().begin();
+			user.setName(newData.getName());
+			user.setPassword(newData.getPassword());
+			em.getTransaction().commit();
+		}
+
+		em.close();
+		emf.close();
+	}
+	
+	public static void verifyPassword(String userName) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+		EntityManager em = emf.createEntityManager();
+		
+		Query q = em.createQuery("SELECT DISTINCT u FROM User u "
+				+ " WHERE u.userName = :userN" );
+		q.setParameter("userN", userName);
+		List<User> user = q.getResultList();
+		
+		System.out.println("NOME:" + user.get(0).name + "\nUSERNAME:"+ user.get(0).userName+"\nSENHA:"+user.get(0).password);
+	}
+	
+	
+	
 	
 	
 

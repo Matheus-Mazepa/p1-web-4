@@ -7,16 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.edu.utfpr.model.Contact;
 import br.edu.utfpr.model.User;
 
 /**
- * Servlet implementation class TesteController
+ * Servlet implementation class Teste
  */
-@WebServlet("/TesteController")
-public class TesteController extends HttpServlet {
+@WebServlet("/teste")
+public class Teste extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public TesteController() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Teste() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,18 +29,11 @@ public class TesteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = new User("Albertinho Penha","abpenha","123456");
+		Contact contact = new Contact();
 		
-		user.salvar();
-		System.out.println("CHEGOU AQUI!");
+		contact.findAll(1);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
 
 }
