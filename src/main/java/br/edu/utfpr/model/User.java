@@ -104,21 +104,27 @@ public class User {
 		emf.close();
 	}
 	
-	public static void verifyPassword(String userName) {
+	public static boolean verifyPassword(String userName, String password) {
+		User user = User.findByUserName(userName);
+	
+		if (user != null) {
+			return BCrypt.checkpw(password, user.getPassword());
+		}
+		return false;
+	}
+	
+	public static User findByUserName(String userName) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
 		EntityManager em = emf.createEntityManager();
 		
 		Query q = em.createQuery("SELECT DISTINCT u FROM User u "
 				+ " WHERE u.userName = :userN" );
 		q.setParameter("userN", userName);
-		List<User> user = q.getResultList();
+		List<User> users = q.getResultList();
 		
-		System.out.println("NOME:" + user.get(0).name + "\nUSERNAME:"+ user.get(0).userName+"\nSENHA:"+user.get(0).password);
+		if (users.size() > 0) {
+			return users.get(0);
+		}
+		return null;
 	}
-	
-	
-	
-	
-	
-
 }

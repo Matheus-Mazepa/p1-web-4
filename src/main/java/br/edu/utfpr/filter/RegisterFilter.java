@@ -11,8 +11,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 
-@WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
-					, servletNames = { "LoginServlet" })
+@WebFilter(dispatcherTypes = {DispatcherType.REQUEST },
+			urlPatterns = { 
+					"/ola", 
+					"/oi"
+			}, 
+					servletNames = { "RegisterController" })
 public class RegisterFilter implements Filter {
     
 
@@ -27,15 +31,14 @@ public class RegisterFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+		System.out.println("no trem");
+
 		if(!request.getParameter("password").equals(request.getParameter("password-confirmation"))) {
 			System.out.println("Senhas não conferem");
 		}
 		else{			
 			chain.doFilter(request, response);
-		}
-		
-		
+		}	
 	}
 
 	/**
