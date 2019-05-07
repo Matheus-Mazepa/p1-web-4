@@ -44,7 +44,7 @@ public class RegisterController extends HttpServlet {
 		
 		String pwd = request.getParameter("password");
 		
-		User user = new User(name, userName, pwd);
+		User user = new User(userName, pwd);
 		user.save();
 	
 		response.sendRedirect("registre-se");

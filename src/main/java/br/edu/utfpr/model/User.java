@@ -4,41 +4,30 @@ import br.edu.utfpr.util.BCrypt;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name= "user_name")
+
+	@Column(name = "user_name")
 	private String userName;
-	
-	@Column(name = "password")
+
 	private String password;
+
+	@OneToOne
+	private Employee employee;
 		
 	public User() {
-		
+
 	}
-	
-	public User(String name, String userName, String password) {
+
+	public User( String userName, String password) {
 		super();
-		this.name = name;
 		this.userName = userName;
 		this.setPassword(password);
 	}
@@ -49,14 +38,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getUserName() {
@@ -95,7 +76,6 @@ public class User {
 		User user = em.find(User.class, id);
 		if(user != null) {
 			em.getTransaction().begin();
-			user.setName(newData.getName());
 			user.setPassword(newData.getPassword());
 			em.getTransaction().commit();
 		}
