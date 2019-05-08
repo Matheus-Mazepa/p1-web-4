@@ -12,15 +12,11 @@ public class Department {
 
     private String name;
 
-    @ManyToOne
-    private Employee employee;
-
     public Department() {
     }
 
     public Department(String name, Employee employee) {
         this.name = name;
-        this.employee = employee;
     }
 
     public int getId() {
@@ -37,13 +33,5 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 }
