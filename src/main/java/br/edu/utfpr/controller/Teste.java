@@ -1,5 +1,7 @@
 package br.edu.utfpr.controller;
 
+import br.edu.utfpr.util.CreateDB;
+
 import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,10 +31,7 @@ public class Teste extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
-		EntityManager em = emf.createEntityManager();
-		em.close();
-		emf.close();
+		CreateDB createDB = new CreateDB();
 
 	}
 

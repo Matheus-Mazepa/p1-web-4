@@ -1,12 +1,10 @@
 package br.edu.utfpr.model;
 
 
-import br.edu.utfpr.util.BCrypt;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
 
     @Id
@@ -17,20 +15,20 @@ public class Employee {
 
     private String cpf;
 
-    @OneToOne
-    private EmployeeContact employeeContact;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @ManyToOne
+    private Department department;
 
     public Employee() {
     }
 
-    public Employee(String name, String cpf, EmployeeContact employeeContact, User user) {
+    public Employee(String name, String cpf, User user, Department department) {
         this.name = name;
         this.cpf = cpf;
-        this.employeeContact = employeeContact;
         this.user = user;
+        this.department = department;
     }
 
     public int getId() {
@@ -54,16 +52,7 @@ public class Employee {
     }
 
     public void setCpf(String cpf) {
-        String passwordHash = BCrypt.hashpw(cpf, BCrypt.gensalt(12));
-        this.cpf = passwordHash;
-    }
-
-    public EmployeeContact getEmployeeContact() {
-        return employeeContact;
-    }
-
-    public void setEmployeeContact(EmployeeContact employeeContact) {
-        this.employeeContact = employeeContact;
+        this.cpf = cpf;
     }
 
     public User getUser() {
@@ -73,4 +62,23 @@ public class Employee {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public void save() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(this);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+
 }

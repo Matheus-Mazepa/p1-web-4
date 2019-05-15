@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 	
 	@Id
@@ -19,9 +19,6 @@ public class User {
 
 	private String password;
 
-	@OneToOne
-	private Employee employee;
-		
 	public User() {
 
 	}
@@ -58,16 +55,16 @@ public class User {
 	}
 	
 	
-	public  void save() {		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		em.persist(this);
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
-	}
-	
+//	public  void save() {
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+//		EntityManager em = emf.createEntityManager();
+//		em.getTransaction().begin();
+//		em.persist(this);
+//		em.getTransaction().commit();
+//		em.close();
+//		emf.close();
+//	}
+//
 	
 	public void update(int id, User newData) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");

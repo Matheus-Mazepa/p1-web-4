@@ -1,8 +1,11 @@
 package br.edu.utfpr.controller;
 
+import br.edu.utfpr.model.Department;
+import br.edu.utfpr.model.Employee;
 import br.edu.utfpr.model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,41 +16,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class RegisterController
- */
-@WebServlet("/registre-se")
+
+@WebServlet("/registrar")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public RegisterController() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/register.jsp")
+
+        ArrayList<Department> departaments = (ArrayList<Department>) Department.getAllDepartments();
+
+        request.setAttribute("departments", departaments);
+
+    	request.getRequestDispatcher("/WEB-INF/view/register.jsp")
 		.forward(request, response);		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter("user_name");
-		String name = request.getParameter("name");
-		
+
+        String name = request.getParameter("name");
+        String cpf = request.getParameter("cpf");
+        String departamento = request.getParameter("departament");
+        String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("password");
-		
-		User user = new User(userName, pwd);
-		user.save();
-	
-		response.sendRedirect("registre-se");
+
+		if(pwd.equals(request.getParameter("password-confirmation"))){
+            Employee newEmployee = new Employee(name,
+                    cpf,
+                    new User(userName,pwd),
+                    Department.findDep(Integer.parseInt(departamento)));
+            newEmployee.save();
+            response.sendRedirect("entrar");
+        }
 	}
 
 }
