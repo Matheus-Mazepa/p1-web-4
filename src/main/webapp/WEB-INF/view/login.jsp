@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,9 @@
 <body>
     <div class="container">
 		<h1 class="text-uppercase">Login</h1>
+        <c:if test="${param.error != null}">
+            O seu nome de usuário ou senha está errado.
+        </c:if>
         <form action="entrar" method="POST">
             <div class="card card-default">
                 <div class="card-body">
