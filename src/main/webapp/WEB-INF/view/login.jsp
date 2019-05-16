@@ -41,6 +41,7 @@
             <div class="card card-default">
                 <div class="col-xs-12 m-10">
                 	<button class="btn btn-primary pull-right" type="submit">Entrar</button>
+                	<a class="btn btn-secondary pull-left" href="/registrar">Registre-se</a>
                 </div>
             </div>
         </form>

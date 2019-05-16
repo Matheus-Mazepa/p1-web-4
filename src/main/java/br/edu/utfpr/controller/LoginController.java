@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.edu.utfpr.model.User;
 
@@ -29,15 +30,14 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("password");
-		if (User.verifyPassword(userName, pwd)) {
-			User user = User.findByUserName(userName);
-			request.getSession().setAttribute("currentUser", user);
-			
-			request.getRequestDispatcher("/WEB-INF/view/login.jsp")
-			.forward(request, response);
+		try {
+			request.login(userName, pwd);
+
+			response.sendRedirect("registrar");
 		}
-		request.getRequestDispatcher("/WEB-INF/view/login.jsp")
-		.forward(request, response);	
+		catch (Exception exception) {
+			response.sendRedirect("entrar?error");
+		}
 	}
 
 }

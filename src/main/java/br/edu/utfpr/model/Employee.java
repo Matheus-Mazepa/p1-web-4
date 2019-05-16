@@ -1,6 +1,5 @@
 package br.edu.utfpr.model;
 
-
 import javax.persistence.*;
 
 @Entity

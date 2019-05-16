@@ -1,6 +1,6 @@
 package br.edu.utfpr.model;
 
-import br.edu.utfpr.util.BCrypt;
+import br.edu.utfpr.util.Sha256Generator;
 
 import java.util.List;
 
@@ -19,11 +19,13 @@ public class User {
 
 	private String password;
 
-	public User() {
+	@Column(name = "role_name")
+	private String roleName;
 
+	public User() {
 	}
 
-	public User( String userName, String password) {
+	public User(String userName, String password) {
 		super();
 		this.userName = userName;
 		this.setPassword(password);
@@ -50,8 +52,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-		this.password = passwordHash;
+		this.password = Sha256Generator.generate(password);
 	}
 	
 	
@@ -79,15 +80,6 @@ public class User {
 
 		em.close();
 		emf.close();
-	}
-	
-	public static boolean verifyPassword(String userName, String password) {
-		User user = User.findByUserName(userName);
-	
-		if (user != null) {
-			return BCrypt.checkpw(password, user.getPassword());
-		}
-		return false;
 	}
 	
 	public static User findByUserName(String userName) {
