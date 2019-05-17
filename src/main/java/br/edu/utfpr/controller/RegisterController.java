@@ -7,9 +7,6 @@ import br.edu.utfpr.model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,8 +45,8 @@ public class RegisterController extends HttpServlet {
 		if(pwd.equals(request.getParameter("password-confirmation"))){
             Employee newEmployee = new Employee(name,
                     cpf,
-                    new User(userName,pwd),
-                    Department.findDep(Integer.parseInt(departamento)));
+                    new User(userName, pwd, "user", pwd),
+                    Department.find(Integer.parseInt(departamento)));
             newEmployee.save();
             response.sendRedirect("entrar");
         }

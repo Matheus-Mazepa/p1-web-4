@@ -2,6 +2,7 @@ package br.edu.utfpr.controller;
 
 import br.edu.utfpr.model.Department;
 import br.edu.utfpr.model.Employee;
+import br.edu.utfpr.model.Order;
 import br.edu.utfpr.model.User;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/a/ordem/criar")
+@WebServlet("/u/ordem/criar")
 public class OrderController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -33,9 +34,15 @@ public class OrderController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String name = request.getParameter("description");
+        String description = request.getParameter("description");
+        String electronicSignature = request.getParameter("electronic_signature");
 
-        response.sendRedirect("/a/ordem/criar");
+        String userName = request.getUserPrincipal().getName();
+        User user = User.findByUserName(userName);
+        Order order = new Order(description, user.getEmployee());
+        order.save();
+
+        response.sendRedirect("/u/ordem/criar?ceateSuccessful");
     }
 
 }

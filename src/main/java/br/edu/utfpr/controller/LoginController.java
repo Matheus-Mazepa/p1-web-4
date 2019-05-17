@@ -14,7 +14,7 @@ import br.edu.utfpr.util.CreateDB;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet({"/entrar",""})
+@WebServlet("/entrar")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +34,11 @@ public class LoginController extends HttpServlet {
 		String pwd = request.getParameter("password");
 		try {
 			request.login(userName, pwd);
+
+			User user = User.findByUserName(userName);
+
+			HttpSession session = request.getSession();
+			session.setAttribute("currentUser", user);
 
 			response.sendRedirect("registrar");
 		}

@@ -46,11 +46,24 @@ public class Department {
         return departments;
     }
 
-    public static Department findDep(int id){
+    public static Department find(int id){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
         EntityManager em = emf.createEntityManager();
 
         Department department = em.find(Department.class, id);
         return department;
+    }
+
+    public static Department findBy(String field, String value){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManager em = emf.createEntityManager();
+
+        Query query = em.createQuery("SELECT d FROM Department d WHERE d." + field + " = ?");
+        query.setParameter(1, value);
+        List<Department> departments = query.getResultList();
+
+        if (departments.size() == 0)
+            return null;
+        return departments.get(0);
     }
 }

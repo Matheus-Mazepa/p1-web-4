@@ -26,7 +26,7 @@ public class CreateDB {
         em.persist(dpManutencao);
         em.persist(dpFinanceiro);
         em.persist(dpTi);
-        em.persist(new User("admin","admin","admin"));
+        em.persist(new User("admin","admin","admin", "admin"));
 
         em.getTransaction().commit();
         em.close();

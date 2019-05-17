@@ -47,4 +47,15 @@ public class Order {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    public void save() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(this);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+
 }
