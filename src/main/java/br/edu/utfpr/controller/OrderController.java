@@ -25,7 +25,6 @@ public class OrderController extends HttpServlet {
         super();
     }
 
-nbvghfg
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/view/order.jsp")
                 .forward(request, response);
