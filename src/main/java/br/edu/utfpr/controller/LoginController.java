@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.edu.utfpr.model.User;
+import br.edu.utfpr.util.CreateDB;
 
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/entrar")
+@WebServlet({"/entrar",""})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public LoginController() {
         super();
-        // TODO Auto-generated constructor stub
+		CreateDB.getInstance();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.getRequestDispatcher("/WEB-INF/view/login.jsp")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    	request.getRequestDispatcher("/WEB-INF/view/login.jsp")
 		.forward(request, response);		
 	}
 
