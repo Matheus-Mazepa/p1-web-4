@@ -39,10 +39,13 @@ public class OrderController extends HttpServlet {
 
         String userName = request.getUserPrincipal().getName();
         User user = User.findByUserName(userName);
-        Order order = new Order(description, user.getEmployee());
-        order.save();
+        if (user.verifyElectronicSignature(electronicSignature)) {
+            Order order = new Order(description, user.getEmployee());
+            order.save();
 
-        response.sendRedirect("/u/ordem/criar?ceateSuccessful");
+            response.sendRedirect("/u/ordem/criar?ceateSuccessful");
+        }
+        response.sendRedirect("/u/ordem/criar?errorElectronicSignature");
     }
 
 }
