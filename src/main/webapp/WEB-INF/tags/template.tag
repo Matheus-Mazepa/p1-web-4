@@ -42,11 +42,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/u/ordem/criar">Criar ordem de serviço <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/u/ordem/criar">Criar ordem de serviço</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Sair</a>
                 </li>
             </ul>
         </div>

@@ -14,7 +14,7 @@ import br.edu.utfpr.util.CreateDB;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/entrar")
+@WebServlet(urlPatterns = {"/entrar", "/logout"})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +24,15 @@ public class LoginController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getServletPath().contains("logout")){
+			HttpSession session = request.getSession(false);
+			if(session != null){
+				session.invalidate();
+			}
+			String address = request.getContextPath() + "/";
+			response.sendRedirect(address);
+			return;
+		}
 
     	request.getRequestDispatcher("/WEB-INF/view/login.jsp")
 		.forward(request, response);		
