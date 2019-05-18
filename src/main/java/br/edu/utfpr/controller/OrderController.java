@@ -44,8 +44,10 @@ public class OrderController extends HttpServlet {
             order.save();
 
             response.sendRedirect("/u/ordem/criar?ceateSuccessful");
-        }
-        response.sendRedirect("/u/ordem/criar?errorElectronicSignature");
+        }else
+            response.sendRedirect("/u/ordem/criar?errorElectronicSignature");
     }
+
+
 
 }

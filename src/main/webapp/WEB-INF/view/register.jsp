@@ -29,13 +29,12 @@
                     <div class="row">
 
                         <div class="form-group col-md-6 col-sm-12">
-                            <label for="name">Nome</label>
-                            <input id="name" type="text" class="form-control" name="name" required/>
+                            <label for="first-name">Nome</label>
+                            <input id="first-name" type="text" class="form-control" name="first-name" required/>
                         </div>
-
                         <div class="form-group col-md-6 col-sm-12">
-                            <label for="cpf">Cpf</label>
-                            <input id="cpf" type="text" class="form-control" name="cpf" required/>
+                            <label for="last-name">Sobrenome</label>
+                            <input id="last-name" type="text" class="form-control" name="last-name" required/>
                         </div>
 
                         <div class="form-group col-md-6 col-sm-12">
@@ -71,6 +70,7 @@
             <div class="card card-default">
                 <div class="col-xs-12 m-10">
                 	<button class="btn btn-primary pull-right" type="submit">Registrar</button>
+                    <a href="/entrar" class="btn btn-primary pull-right" >Cancelar</a>
                 </div>
             </div>
         </form>

@@ -20,7 +20,6 @@ public class LoginController extends HttpServlet {
 
     public LoginController() {
         super();
-		CreateDB.getInstance();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,8 +47,13 @@ public class LoginController extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", user);
-
-			response.sendRedirect("registrar");
+            if(user.getRoleName().equals("admin")){
+			    response.sendRedirect("a/registrar");
+            }else if(user.getRoleName().equals("user-maintenance")){
+                response.sendRedirect("m/manutencao");
+            }else if(user.getRoleName().equals("user")){
+            	response.sendRedirect("u/ordem/criar");
+			}
 		}
 		catch (Exception exception) {
 			response.sendRedirect("entrar?error");

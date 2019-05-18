@@ -12,8 +12,6 @@ public class Employee {
 
     private String name;
 
-    private String cpf;
-
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
@@ -23,9 +21,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String cpf, User user, Department department) {
+    public Employee(String name, User user, Department department) {
         this.name = name;
-        this.cpf = cpf;
         this.user = user;
         this.department = department;
     }
@@ -44,14 +41,6 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public User getUser() {

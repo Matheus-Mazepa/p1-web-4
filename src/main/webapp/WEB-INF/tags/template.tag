@@ -23,23 +23,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/common.css"/>
-    <k rel="stylesheet" href="/resources/lib/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/resources/lib/font-awesome/css/font-awesome.min.css"/>
 
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"></link>
+          rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Roboto:200,700'
-          rel='stylesheet' type='text/css'></link>
+          rel='stylesheet' type='text/css'/>
 
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Agenda online</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" >Agenda online</a>
+        <%--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"--%>
+                <%--aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--%>
+            <%--<span class="navbar-toggler-icon"></span>--%>
+        <%--</button>--%>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -51,7 +51,9 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Sair</a>
+                    <c:if test="${currentUser != null}">
+                        <a class="nav-link" href="/logout">Sair</a>
+                    </c:if>
                 </li>
             </ul>
         </div>
