@@ -4,15 +4,29 @@
 
 <t:template title="Ordens">
     <jsp:body>
-        <h1>Ordens de serviço</h1>
-        <div class="container">
+
             <table class="table margin-table">
-                <tr>
-                    <th>Ações</th>
-                    <th>Descrição</th>
-                    <th>Total</th>
-                </tr>
-            </table>
-        </div>
+            <tr>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+            <c:forEach var="order" items="${orders}">
+                <c:if test="${!order.done}">
+                    <tr>
+                        <td>${order.description}</td>
+                        <td>
+                            <a href="" class="btn btn-primary btn-xs" title="Info">
+                                <i class="far fa-info-circle"></i>
+                            </a>
+                            <a href="" class="btn btn-success btn-xs" title="Feita">
+                                <i class="far fa-check-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+    </table>
+
+
     </jsp:body>
 </t:template>

@@ -12,9 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/registrar")
+@WebServlet("/a/registrar")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,19 +37,28 @@ public class RegisterController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String name = request.getParameter("name");
-        String cpf = request.getParameter("cpf");
+        String fName = request.getParameter("first-name");
+        String lName = request.getParameter("last-name");
+        String fullName = fName + " "+ lName;
         String departamento = request.getParameter("departament");
         String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("password");
+		String role = "";
+
+		if(departamento.equals("1")){
+		    role = "user-maintenance";
+        }else{
+		    role = "user";
+        }
 
 		if(pwd.equals(request.getParameter("password-confirmation"))){
-            Employee newEmployee = new Employee(name,
-                    cpf,
-                    new User(userName, pwd, "user", pwd),
+            Employee newEmployee = new Employee(fullName,
+                    new User(userName, pwd, role, pwd),
                     Department.find(Integer.parseInt(departamento)));
             newEmployee.save();
-            response.sendRedirect("entrar");
+            request.getSession().invalidate();
+            request.getRequestDispatcher("/WEB-INF/view/login.jsp")
+                    .forward(request, response);
         }
 	}
 

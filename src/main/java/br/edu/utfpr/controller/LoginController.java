@@ -14,17 +14,16 @@ import br.edu.utfpr.util.CreateDB;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/entrar")
+@WebServlet({"/entrar"})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public LoginController() {
         super();
-		CreateDB.getInstance();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.getSession().invalidate();
     	request.getRequestDispatcher("/WEB-INF/view/login.jsp")
 		.forward(request, response);		
 	}
@@ -39,8 +38,13 @@ public class LoginController extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", user);
-
-			response.sendRedirect("registrar");
+            if(user.getRoleName().equals("admin")){
+			    response.sendRedirect("a/registrar");
+            }else if(user.getRoleName().equals("user-maintenance")){
+                response.sendRedirect("m/manutencao");
+            }else if(user.getRoleName().equals("user")){
+            	response.sendRedirect("u/ordem/criar");
+			}
 		}
 		catch (Exception exception) {
 			response.sendRedirect("entrar?error");

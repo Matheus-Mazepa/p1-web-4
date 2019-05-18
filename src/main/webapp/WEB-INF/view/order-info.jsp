@@ -2,29 +2,34 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:template title="Criar">
+<t:template title="Info">
     <jsp:body>
-        <h1>Criar ordem de serviço</h1>
+        <h1>Detalhes ordem</h1>
         <div class="container">
-            <form action="/u/ordem/criar" method="POST">
+            <form action="" method="">
                 <div class="card card-default">
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-sm-12">
                                 <label for="description">Descrição</label>
-                                <textarea id="description" type="text" class="form-control" name="description"></textarea>
+                                <textarea id="description" type="text" class="form-control" name="description" disabled>${order.description}</textarea>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="employee_name">Empregado</label>
+                                <input id="employee_name" type="text" class="form-control" name="employee_name" value="${order.employee.name}" disabled/>
                             </div>
 
                             <div class="form-group col-sm-12">
-                                <label for="electronic_signature">Assinatura eletronica</label>
-                                <input id="electronic_signature" type="password" class="form-control" name="electronic_signature"/>
+                                <label for="department">Departamento</label>
+                                <input id="department" type="text" class="form-control" name="department" value="${order.employee.department.name}" disabled/>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="card card-default">
                     <div class="col-xs-12 m-10">
-                        <button class="btn btn-primary pull-right" type="submit">Enviar</button>
+                        <a href="/m/manutencao" class="btn btn-primary pull-right" >Voltar</a>
                     </div>
                 </div>
             </form>
