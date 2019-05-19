@@ -61,6 +61,10 @@
                             <label for="password-confirmation">Confirmação de senha</label>
                             <input id="password-confirmation" type="password" class="form-control" name="password-confirmation" required/>
                         </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="eletronic-signature">Assinatura Eletronica</label>
+                            <input id="eletronic-signature" type="password" class="form-control" name="eletronic-signature" required/>
+                        </div>
                         <div>
                             <p id="p-error-password"></p>
                         </div>

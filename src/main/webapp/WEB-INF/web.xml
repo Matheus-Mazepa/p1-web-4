@@ -52,10 +52,13 @@
   </login-config>
   <error-page>
     <error-code>404</error-code>
-    <location>/WEB-INF/404.html</location>
+    <location>/WEB-INF/view/error-pages/error-404.jsp</location>
   </error-page>
   <error-page>
     <error-code>403</error-code>
-    <location>/WEB-INF/403.html</location>
+    <location>/WEB-INF/view/error-pages/error-403.jsp</location>
+  </error-page>
+  <error-page>
+    <location>/error-handler</location>
   </error-page>
 </web-app>

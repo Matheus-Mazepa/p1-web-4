@@ -41,6 +41,7 @@ public class RegisterController extends HttpServlet {
         String departamento = request.getParameter("departament");
         String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("password");
+		String eletronicSignature = request.getParameter("eletronic-signature");
 		String role = "";
 
 		if(departamento.equals("1")){
@@ -51,7 +52,8 @@ public class RegisterController extends HttpServlet {
 
 		if(pwd.equals(request.getParameter("password-confirmation"))){
             Employee newEmployee = new Employee(fName,
-                    new User(userName, pwd, role, pwd),
+                    new User(userName, pwd, role, eletronicSignature
+                    ),
                     Department.find(Integer.parseInt(departamento)));
             newEmployee.save();
             request.getSession().invalidate();
