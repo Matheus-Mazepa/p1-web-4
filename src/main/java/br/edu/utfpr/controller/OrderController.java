@@ -49,8 +49,11 @@ public class OrderController extends HttpServlet {
 
             String userName = request.getUserPrincipal().getName();
             User user = User.findByUserName(userName);
-            if (user.verifyElectronicSignature(electronicSignature) || request.getSession().getAttribute("electronicSignature") != null) {
-                request.getSession().setAttribute("electronicSignature", electronicSignature);
+            boolean hasElectronicSignatureSession = request.getSession().getAttribute("electronicSignature") != null;
+            if (user.verifyElectronicSignature(electronicSignature) || hasElectronicSignatureSession) {
+                if (!hasElectronicSignatureSession) {
+                    request.getSession().setAttribute("electronicSignature", electronicSignature);
+                }
                 Order order = new Order(description, user.getEmployee());
                 order.save();
 

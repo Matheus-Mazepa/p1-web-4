@@ -32,7 +32,7 @@
                                 <textarea id="description" type="text" class="form-control" name="description"></textarea>
                             </div>
 
-                            <c:if test="${electronicSignature != null}">
+                            <c:if test="${electronicSignature == null}">
                                 <div class="form-group col-sm-12">
                                     <label for="electronic_signature">Assinatura eletrônica</label>
                                     <input id="electronic_signature" type="password" class="form-control" name="electronic_signature"/>
