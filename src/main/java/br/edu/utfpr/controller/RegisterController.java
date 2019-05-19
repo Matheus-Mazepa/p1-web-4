@@ -55,7 +55,7 @@ public class RegisterController extends HttpServlet {
                     Department.find(Integer.parseInt(departamento)));
             newEmployee.save();
             request.getSession().invalidate();
-            response.sendRedirect("/entrar");
+            response.sendRedirect("/");
         }
 	}
 

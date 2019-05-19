@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +49,8 @@ public class OrderController extends HttpServlet {
 
             String userName = request.getUserPrincipal().getName();
             User user = User.findByUserName(userName);
-            if (user.verifyElectronicSignature(electronicSignature)) {
+            if (user.verifyElectronicSignature(electronicSignature) || request.getSession().getAttribute("electronicSignature") != null) {
+                request.getSession().setAttribute("electronicSignature", electronicSignature);
                 Order order = new Order(description, user.getEmployee());
                 order.save();
 

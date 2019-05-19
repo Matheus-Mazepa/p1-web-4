@@ -24,7 +24,12 @@
 <div class="container">
     <h1 class="text-uppercase">Login</h1>
     <c:if test="${param.error != null}">
-        O seu nome de usuário ou senha está errado.
+        <div class="alert alert-danger" role="alert">
+            O seu nome de usuário ou senha está errado.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </c:if>
     <form action="/entrar" method="POST">
         <div class="card card-default">
@@ -32,7 +37,28 @@
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <label for="user_name">Nome do Usuário</label>
-                        <input id="user_name" type="text" class="form-control" name="user_name"/>
+                        <%
+                            Cookie cookie = null;
+                            Cookie[] cookies = null;
+
+                            // Get an array of Cookies associated with the this domain
+                            cookies = request.getCookies();
+
+                            if( cookies != null ) {
+                                boolean hasUserName = false;
+                                for (int i = 0; i < cookies.length; i++) {
+                                    cookie = cookies[i];
+
+                                    if((cookie.getName( )).compareTo("userNameCookie") == 0 ) {
+                                        hasUserName = true;
+                                        out.print("<input id=\"user_name\" type=\"text\" value=\"" + cookie.getValue() + "\" class=\"form-control\" name=\"user_name\"/>");
+                                    }
+                                }
+                                if (!hasUserName) {
+                                    out.print("<input id=\"user_name\" type=\"text\" class=\"form-control\" name=\"user_name\"/>");
+                                }
+                            }
+                        %>
                     </div>
 
                     <div class="form-group col-sm-12">

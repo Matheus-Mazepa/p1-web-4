@@ -16,7 +16,7 @@ public class CreateDB {
     }
 
     public void createDB(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Department dpManutencao = new Department("Manutenção");

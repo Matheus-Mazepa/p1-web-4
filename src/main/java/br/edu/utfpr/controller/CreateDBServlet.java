@@ -17,5 +17,6 @@ public class CreateDBServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CreateDB.getInstance();
+        response.sendRedirect("/");
     }
 }
