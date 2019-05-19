@@ -37,7 +37,7 @@ public class Department {
     }
 
     public static List<Department> getAllDepartments(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("SELECT d FROM Department d");
@@ -47,7 +47,7 @@ public class Department {
     }
 
     public static Department find(int id){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Department department = em.find(Department.class, id);
@@ -55,7 +55,7 @@ public class Department {
     }
 
     public static Department findBy(String field, String value){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Query query = em.createQuery("SELECT d FROM Department d WHERE d." + field + " = ?");

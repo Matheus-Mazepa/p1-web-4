@@ -60,7 +60,7 @@ public class Order {
     }
 
     public void save() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         if (this.id != 0)
@@ -73,7 +73,7 @@ public class Order {
     }
 
     public static List<Order> findAll(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Query q = em.createQuery("SELECT DISTINCT o FROM Order o ");
@@ -84,7 +84,7 @@ public class Order {
 
 
     public static Order find(int id){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
         Order order = em.find(Order.class, id);
 

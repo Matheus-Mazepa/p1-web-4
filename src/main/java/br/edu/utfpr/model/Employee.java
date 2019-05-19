@@ -60,7 +60,7 @@ public class Employee {
     }
 
     public void save() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(this);

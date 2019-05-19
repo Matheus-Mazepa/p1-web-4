@@ -92,19 +92,8 @@ public class User {
         return BCrypt.checkpw(electronicSignature, this.getElectronicSignature());
     }
 
-    //	public  void save() {
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
-//		EntityManager em = emf.createEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(this);
-//		em.getTransaction().commit();
-//		em.close();
-//		emf.close();
-//	}
-//
-
     public void update(int id, User newData) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         User user = em.find(User.class, id);
@@ -119,7 +108,7 @@ public class User {
     }
 
     public static User find(int id) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         User user = em.find(User.class, id);
@@ -127,7 +116,7 @@ public class User {
     }
 
     public static User findByUserName(String userName) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
         EntityManager em = emf.createEntityManager();
 
         Query q = em.createQuery("SELECT DISTINCT u FROM User u "
