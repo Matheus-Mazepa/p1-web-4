@@ -31,15 +31,13 @@ public class RegisterController extends HttpServlet {
         request.setAttribute("departments", departaments);
 
     	request.getRequestDispatcher("/WEB-INF/view/register.jsp")
-		.forward(request, response);		
+		.forward(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String fName = request.getParameter("first-name");
-        String lName = request.getParameter("last-name");
-        String fullName = fName + " "+ lName;
         String departamento = request.getParameter("departament");
         String userName = request.getParameter("user_name");
 		String pwd = request.getParameter("password");
@@ -52,13 +50,12 @@ public class RegisterController extends HttpServlet {
         }
 
 		if(pwd.equals(request.getParameter("password-confirmation"))){
-            Employee newEmployee = new Employee(fullName,
+            Employee newEmployee = new Employee(fName,
                     new User(userName, pwd, role, pwd),
                     Department.find(Integer.parseInt(departamento)));
             newEmployee.save();
             request.getSession().invalidate();
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp")
-                    .forward(request, response);
+            response.sendRedirect("/entrar");
         }
 	}
 

@@ -63,26 +63,13 @@ public class Order {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(this);
+        if (this.id != 0)
+            em.merge(this);
+        else
+            em.persist(this);
         em.getTransaction().commit();
         em.close();
         emf.close();
-    }
-
-    public void update(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("agenda");
-        EntityManager em = emf.createEntityManager();
-
-        Order order = Order.find(this.id);
-        if(order != null){
-            em.getTransaction().begin();
-            order.setDone(true);
-            em.getTransaction().commit();
-        }
-
-        em.close();
-        emf.close();
-
     }
 
     public static List<Order> findAll(){

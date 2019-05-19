@@ -1,37 +1,38 @@
 package br.edu.utfpr.filter;
 
-import java.io.IOException;
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-
-@WebFilter(dispatcherTypes = {DispatcherType.REQUEST },
-			urlPatterns = { 
-					"/registrar",
-			}, 
-					servletNames = { "RegisterController" })
+/**
+ * Filtro responsável por apresentar a tela de login quando
+ * o usuário não está logado ou a tela inicial do perfil quando
+ * o usuário está logado.
+ *
+ * As telas são apresentadas ao acessar o path raiz.
+ */
+@WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/a/registrar" })
 public class RegisterFilter implements Filter {
-    
 
+    public void destroy() {
+        // TODO Auto-generated method stub
+    }
 
-	public void destroy() {
-	}
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
 
+        if(httpRequest.getMethod().equalsIgnoreCase("POST")){
+            chain.doFilter(new RegisterWrapper((HttpServletRequest) request), response);
+        } else {
+            chain.doFilter(request, response);
+        }
+    }
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-
-
-	}
-
-
-	public void init(FilterConfig fConfig) throws ServletException {
-	}
+    public void init(FilterConfig fConfig) throws ServletException {
+        // TODO Auto-generated method stub
+    }
 
 }

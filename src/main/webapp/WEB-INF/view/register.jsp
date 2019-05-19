@@ -70,7 +70,7 @@
             <div class="card card-default">
                 <div class="col-xs-12 m-10">
                 	<button class="btn btn-primary pull-right" type="submit">Registrar</button>
-                    <a href="/entrar" class="btn btn-primary pull-right" >Cancelar</a>
+                    <a href="/entrar" class="btn btn-primary pull-left" >Cancelar</a>
                 </div>
             </div>
         </form>

@@ -18,7 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/u/ordem/criar")
+@WebServlet(urlPatterns = {
+        "/u/ordem/criar",
+        "/m/set-as-done"
+})
 public class OrderController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -33,19 +36,27 @@ public class OrderController extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String description = request.getParameter("description");
-        String electronicSignature = request.getParameter("electronic_signature");
-
-        String userName = request.getUserPrincipal().getName();
-        User user = User.findByUserName(userName);
-        if (user.verifyElectronicSignature(electronicSignature)) {
-            Order order = new Order(description, user.getEmployee());
+        if (request.getServletPath().contains("set-as-done")) {
+            int idOrder = Integer.parseInt(request.getParameter("id"));
+            Order order = Order.find(idOrder);
+            order.setDone(true);
             order.save();
+            response.sendRedirect("/m/manutencao");
+        } else {
+            String description = request.getParameter("description");
+            String electronicSignature = request.getParameter("electronic_signature");
 
-            response.sendRedirect("/u/ordem/criar?ceateSuccessful");
-        }else
-            response.sendRedirect("/u/ordem/criar?errorElectronicSignature");
+            String userName = request.getUserPrincipal().getName();
+            User user = User.findByUserName(userName);
+            if (user.verifyElectronicSignature(electronicSignature)) {
+                Order order = new Order(description, user.getEmployee());
+                order.save();
+
+                response.sendRedirect("/u/ordem/criar?ceateSuccessful");
+            }else
+                response.sendRedirect("/u/ordem/criar?errorElectronicSignature");
+        }
+
     }
 
 
