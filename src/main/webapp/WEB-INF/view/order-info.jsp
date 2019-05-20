@@ -16,12 +16,12 @@
                             </div>
                             <div class="form-group col-sm-12">
                                 <label for="employee_name">Empregado</label>
-                                <input id="employee_name" type="text" class="form-control" name="employee_name" value="${order.employee.name}" disabled/>
+                                <input id="employee_name" type="text" class="form-control" name="employee_name" value="${order.employeeName}" disabled/>
                             </div>
 
                             <div class="form-group col-sm-12">
                                 <label for="department">Departamento</label>
-                                <input id="department" type="text" class="form-control" name="department" value="${order.employee.department.name}" disabled/>
+                                <input id="department" type="text" class="form-control" name="department" value="${order.departmentName}" disabled/>
                             </div>
 
                         </div>
