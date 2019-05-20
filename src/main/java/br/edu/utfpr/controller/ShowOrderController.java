@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/m/ordem")
+@WebServlet("/m/ordem/show")
 public class ShowOrderController extends HttpServlet {
 
     @Override
