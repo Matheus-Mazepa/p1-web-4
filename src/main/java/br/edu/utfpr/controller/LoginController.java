@@ -48,13 +48,7 @@ public class LoginController extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", user);
-            if(user.getRoleName().equals("admin")){
-			    response.sendRedirect("a/registrar");
-            }else if(user.getRoleName().equals("user-maintenance")){
-                response.sendRedirect("m/manutencao");
-            }else if(user.getRoleName().equals("user")){
-            	response.sendRedirect("u/ordem/criar");
-			}
+			response.sendRedirect("/");
 		}
 		catch (Exception exception) {
 			response.sendRedirect("entrar?error");

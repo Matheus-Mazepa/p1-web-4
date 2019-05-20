@@ -27,7 +27,7 @@ public class LoginFilter implements Filter {
 				address = "/a/registrar";
 				((HttpServletResponse) response).sendRedirect(address);
 			} else if (req.isUserInRole("user")) {
-				address = "/u/ordem/criar";
+				address = "/u/ordem";
 				((HttpServletResponse) response).sendRedirect(address);
 			} else {
 				address = "/m/manutencao";

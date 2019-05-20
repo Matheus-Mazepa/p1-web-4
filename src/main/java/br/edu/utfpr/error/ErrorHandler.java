@@ -12,8 +12,16 @@ public class ErrorHandler extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
-        String error = throwable.getMessage();
+        Integer statusCode = (Integer)
+                request.getAttribute("javax.servlet.error.status_code");
+        String error = null;
+
+        if (statusCode != null){
+            error = " "+ statusCode;
+        }else{
+            error = "Desconhecido";
+        }
+
 
 
         request.setAttribute("error", error);

@@ -82,6 +82,19 @@ public class Order {
         return orders;
     }
 
+    public static List<Order> findAllByUserId(int id){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");
+        EntityManager em = emf.createEntityManager();
+
+        Query q = em.createQuery("SELECT DISTINCT o FROM Order o WHERE o.employee.user.id=:id");
+        q.setParameter("id",id);
+        List<Order> orders = q.getResultList();
+
+        return orders;
+    }
+
+
+
 
     public static Order find(int id){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("servicos");

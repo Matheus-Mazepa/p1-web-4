@@ -6,12 +6,12 @@
     <jsp:body>
 
         <div class="container">
-            <div class="col-sm-12">
-                <h2 class="text-center font-italic">Ops!!! Algo deu errado!!</h2>
+            <div class="col-sm-12 text-center">
+                <h2 class=" font-italic">Ops!!! Algo deu errado!!</h2>
                 <c:if test="${not empty error}">
                     <p>
                         <h3>Error:</h3>
-                        ${error.msg}
+                        ${error}.
                     </p>
                 </c:if>
                 <div class="row">
